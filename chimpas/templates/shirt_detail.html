@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+            <div class="container">
+
+                    <h1 style="float: right;">{{ shirts.price }}₽</h1>
+                    <h1>{{ shirts.name }}</h1>
+                <img src="{{ shirts.image.url }}" alt="tema klop" width="500px" height="590px">
+                    <p class="card-text text-break">{{ shirts.description }}</p>
+                {{ shirts.sizes }}
+                {{ form_shirts }}
+                    <button type="submit" onclick="window.location.href = '{% url 'cart:cart_add' shirts.pk %}'" class="btn btn-success btn-lg">В корзину</button>
+                {% if user.is_superuser %}
+                    <button type="submit" onclick="window.location.href = '{% url 'shirt_edit' shirts.pk %}'" class="btn btn-warning btn-lg">Изменить</button>
+                    <button type="submit" onclick="window.location.href = '{% url 'shirt_delete' shirts.pk %}'" class="btn btn-danger btn-lg">Удалить</button>
+                {% endif %}
+            </div>
+{% endblock content %}
